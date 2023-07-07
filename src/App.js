@@ -30,8 +30,8 @@ export default function App() {
     ) {
       const data = new FormData();
       data.append("file", image);
-      data.append("upload_preset", "projects");
-      data.append("cloud_name", "dakda5ni3");
+      data.append("upload_preset", "your_upload_preset");
+      data.append("cloud_name", "your_cloud_name");
       fetch("https://api.cloudinary.com/v1_1/dakda5ni3/image/upload", {
         method: "post",
         body: data,
