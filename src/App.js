@@ -65,6 +65,7 @@ export default function App() {
       email: email,
       photo: url,
     };
+    // if it is req.body in the backend use "," beside api, or if it is req.params user "+" or do an interpolation statement.
     await axios
       .post("http://localhost:4000/api/post-users", data)
       .then((res) => setSuccessMessage(res.message))
