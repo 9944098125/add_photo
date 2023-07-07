@@ -10,6 +10,7 @@ export default function App() {
   const [url, setUrl] = React.useState("");
   const [successMessage, setSuccessMessage] = React.useState("");
   React.useEffect(() => {
+    // create an asynchronous function to fetch the users
     const fetchUsers = async () => {
       const res = await axios.get("http://localhost:4000/api/get-users");
       // console.log(res.data.users);
@@ -18,7 +19,7 @@ export default function App() {
     fetchUsers();
   });
 
-  const onChangeImage = (image) => {
+  const onChangeImage = async (image) => {
     if (image === undefined) {
       return;
     }
@@ -30,14 +31,20 @@ export default function App() {
     ) {
       const data = new FormData();
       data.append("file", image);
+      // place your upload preset here
       data.append("upload_preset", "your_upload_preset");
+      // place your cloud name here
       data.append("cloud_name", "your_cloud_name");
-      fetch("https://api.cloudinary.com/v1_1/dakda5ni3/image/upload", {
+      // keep the fetching api and method same
+      await fetch("https://api.cloudinary.com/v1_1/dakda5ni3/image/upload", {
         method: "post",
         body: data,
       })
         .then((res) => res.json())
         .then((data) => {
+          // settiung the url with data.url we got from response
+          // and send this to backend 
+          // first console.log the data and see what's there in data.
           setUrl(data.url);
         })
         .catch((err) => {
@@ -49,6 +56,7 @@ export default function App() {
   };
 
   const handleSubmit = async () => {
+    // creating an object to send data to backend
     const data = {
       name: name,
       email: email,
@@ -88,7 +96,7 @@ export default function App() {
           {url && <img src={url} alt="" height="50px" width="50px" />}
           <button type="submit">Submit</button>
         </form>
-        {successMessage}
+        {successMessage && successMessage}
       </div>
     </React.Fragment>
   );
