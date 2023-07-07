@@ -19,6 +19,9 @@ export default function App() {
     fetchUsers();
   });
 
+  // you can even convert the image you get into base64 and 
+  // upload the image without the use of any api's and form data.
+  // do a small research for that.
   const onChangeImage = async (image) => {
     if (image === undefined) {
       return;
